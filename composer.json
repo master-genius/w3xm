@@ -1,0 +1,23 @@
+{
+    "require": {
+        "slim/slim": "^3.0",
+        "catfan/medoo": "^1.6",
+        "phpmailer/phpmailer": "^6.0"
+    },
+
+    "autoload": {
+        "files" : ["./lib/common.php", "./lib/syscall.php" , "./lib/sysvar.php"],
+        "psr-4" : {
+            "Auth\\"   : "Auth",
+            "Core\\"   : "Core",
+            "Access\\"    : "Access",
+            "First\\"  : "First",
+            "Interfaces\\" : "Interfaces",
+            "Model\\"  : "Model",
+            "Error\\"  : "Error",
+            "Task\\"   : "Task",
+            "Middleware\\" : "Middleware"
+        }
+    }
+
+}

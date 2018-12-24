@@ -13,7 +13,7 @@ $co = new \Slim\Container;
 
 $co['APIU'] = function($co) {
     return (new \First\First);
-}
+};
 
 $co['APIUser'] = function($co) {
     return (new \Access\User);

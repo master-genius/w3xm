@@ -121,7 +121,7 @@ $app->group('/r', function() use ($app) {
 $app->group('/w', function() use ($app) {
 
     $app->get('/rs/get/{id}', function($req, $res, $args) {
-        return $this->APIUser->wget($req, $res, $args['id']);
+        return $this->APIU->wget($req, $res, $args['id']);
     });
 
     $app->post('/rs/add', function($req, $res) {
@@ -153,7 +153,7 @@ $app->group('/w', function() use ($app) {
     });
 
     $app->get('/role/menu', function($req, $res) {
-        return $this->APIUser->getUserMenu($req, $res);
+        return $this->APIU->getUserMenu($req, $res);
     });
 
     $app->post('/lecture/add', function($req, $res) {

@@ -13,7 +13,7 @@ class Group {
         return DB::instance()->select($this->table, [
             'id', 'group_name'
         ],[
-            'id[>]' => 0
+            'is_hidden' => 0
         ]);
     }
 

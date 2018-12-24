@@ -11,8 +11,12 @@ use \Middleware\MediaWare;
 
 $co = new \Slim\Container;
 
-$co['APIUser'] = function($co) {
+$co['APIU'] = function($co) {
     return (new \First\First);
+}
+
+$co['APIUser'] = function($co) {
+    return (new \Access\User);
 };
 
 $co['APIReader'] = function($co) {
@@ -63,7 +67,7 @@ $app = new \Slim\App($co);
 $app->group('/u', function() use ($app) {
 
     $app->get('/rs/group/list', function($req, $res) {
-        return $this->APIUser->groupList($req, $res);
+        return $this->APIU->groupList($req, $res);
     });
 
     $app->get('/rs/list', function($req, $res) {
@@ -75,7 +79,7 @@ $app->group('/u', function() use ($app) {
     });
 
     $app->get('/rs/get/{id}', function($req, $res, $args) {
-        return $this->APIUser->get($req, $res, $args['id']);
+        return $this->APIU->get($req, $res, $args['id']);
     });
 
     $app->get('/host', function($req, $res) {
@@ -250,6 +254,37 @@ $app->group('/m', function() use ($app) {
 )->add(
     new AuthWare
 );
+
+/*
+    这部分接口只负责用户的登录，退出，重置密码等操作
+*/
+
+$app->group('/user', function() use ($app) {
+    $app->post('/login', function($req, $res) {
+        return $this->APIUser->login($req, $res);
+    });
+
+    $app->get('/email-verify', function($req, $res) {
+        return (new \Access\User)->verifyEmail($req, $res);
+    });
+
+    $app->post('/reply-find-passwd', function($req, $res) {
+        return (new \Access\User)->replyFindPasswd($req, $res);
+    });
+
+    $app->post('/reset/passwd', function($req, $res) {
+        return (new \Access\User)->findPasswd($req, $res);
+    });
+
+    $app->post('/resend-verify-email', function($req, $res) {
+    
+    });
+
+    $app->post('/register', function($req, $res) {
+        return $this->APIUser->register($req, $res);
+    });
+
+});
 
 
 $app->run();

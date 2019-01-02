@@ -70,8 +70,8 @@ $app = new \Slim\App($co);
 
 $app->group('/wx', function() use ($app) {
     $app->get('/talk', function($req, $res) {
-        return ApiRet::raw($res, $this->WXT->valid());
-        //return ApiRet::raw($res, $this->WXT->responseMsg());
+        //return ApiRet::raw($res, $this->WXT->valid());
+        return ApiRet::raw($res, $this->WXT->responseMsg());
     });
 });
 

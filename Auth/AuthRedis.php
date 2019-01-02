@@ -13,7 +13,7 @@ class AuthRedis implements \Interfaces\AuthInterface {
 
         'pre'       => 'cwr_user_',
 
-        'timeout'   => 5400
+        'timeout'   => 3600
     ];
 
 
@@ -77,12 +77,12 @@ class AuthRedis implements \Interfaces\AuthInterface {
 
     public function get($token = '') {
         $name = $this->makeKey($token);
-        file_put_contents('/tmp/buffer.log', $token);
         $user_key = $this->redis->get($name);
         if (false === $user_key) {
             return false;
         }
 
+        $this->redis->expire($name, $this->config['timeout']);
         $u = SSL::decryptToken($token, $user_key);
         return $u;
     }

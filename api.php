@@ -39,6 +39,10 @@ $co['APILecture'] = function($co) {
     return (new \Access\Lecture);
 };
 
+$co['WXT']  =   function($co) {
+    return (new \Access\WXTalk);
+};
+
 //404
 $co['notFoundHandler'] = function() {
     return function($req, $res) use ($co) {
@@ -63,6 +67,13 @@ $app = new \Slim\App($co);
  * /w 具备/r用户的权限
  * 
  * */
+
+$app->group('/wx', function() use ($app) {
+    $app->get('/talk', function($req, $res) {
+        return ApiRet::raw($res, $this->WXT->valid());
+        //return ApiRet::raw($res, $this->WXT->responseMsg());
+    });
+});
 
 $app->group('/u', function() use ($app) {
 

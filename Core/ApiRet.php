@@ -3,7 +3,7 @@ namespace Core;
 
 class ApiRet {
     
-    static public $CORS = 'https://api.w3xm.top;https://www.w3xm.top; https://w3xm.top';
+    static public $CORS = 'https://api.w3xm.top,https://www.w3xm.top, https://w3xm.top';
 
     static public function send($res, $data = '') {
         return $res->withHeader(

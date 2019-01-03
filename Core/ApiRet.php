@@ -19,6 +19,9 @@ class ApiRet {
         return $res->withHeader(
             'Access-Control-Allow-Origin',
             self::$CORS
+        )->withHeader(
+            'Access-Control-Allow-Credentials',
+            "true"
         )->withStatus(200)->write($data);
     }
 

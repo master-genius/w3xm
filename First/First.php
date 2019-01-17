@@ -151,12 +151,17 @@ class First {
                 } elseif ( $tmp_len > 0 ) {
                     $kwd_list[] = $tmp;
                 }
+                file_put_contents(
+                    '/tmp/wxm.log', 
+                    json_encode($kwd_list, JSON_UNESCAPED_UNICODE), 
+                    FILE_APPEND
+                );
             }
 
             if (count($kwd_list) > 0) {
                 $cond['AND']['OR'] = [
                     'rs_title[~]'    => [ 'AND' => $kwd_list ],
-                    'rs_keywords[~]' => [ 'OR' => $kwd_list ]
+                    'rs_keywords[~]' => [ 'AND' => $kwd_list ]
                 ];
             }
         }

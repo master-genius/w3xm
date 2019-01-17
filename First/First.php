@@ -153,13 +153,13 @@ class First {
                 }
 
                 $kwd_list[] = $search_text;
-                /*
+                
                 file_put_contents(
                     '/tmp/wxm.log', 
-                    json_encode($kwd_list, JSON_UNESCAPED_UNICODE), 
+                    json_encode($kwd_list, JSON_UNESCAPED_UNICODE) . "\n",
                     FILE_APPEND
                 );
-                */
+                
             }
 
             if (count($kwd_list) > 0) {

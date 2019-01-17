@@ -135,21 +135,28 @@ class First {
         */
         if (!empty($kwd)) {
             //limit length 30
-            $kwd = substr($kwd, 0, 30);
+            $kwd = mb_substr($kwd, 0, 36);
 
             $ktmp = explode(' ', $kwd);
+            
             $tmp = '';
+            $tmp_len = 0;
             foreach($ktmp as $k) {
                 $tmp = trim($k);
-                if ( !empty($tmp) ) {
+                $tmp_len = mb_strlen($tmp);
+                if ($tmp_len > 4) {
+                    for($i=2; $i < $tmp_len; $i++) {
+                        $kwd_list[] = mb_substr($tmp, $i-1, 2);
+                    }
+                } elseif ( $tmp_len > 0 ) {
                     $kwd_list[] = $tmp;
                 }
             }
 
             if (count($kwd_list) > 0) {
                 $cond['AND']['OR'] = [
-                    'rs_title[~]'    => $kwd_list,
-                    'rs_keywords[~]' => $kwd_list
+                    'rs_title[~]'    => [ 'AND' => $kwd_list ],
+                    'rs_keywords[~]' => [ 'AND' => $kwd_list ]
                 ];   
             }
         }

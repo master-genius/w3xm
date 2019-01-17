@@ -135,7 +135,7 @@ class First {
         */
         if (!empty($kwd)) {
             //limit length 30
-            $kwd = mb_substr($kwd, 0, 36);
+            $kwd = mb_substr($kwd, 0, 18);
 
             $ktmp = explode(' ', $kwd);
             
@@ -143,25 +143,30 @@ class First {
             $tmp_len = 0;
             foreach($ktmp as $k) {
                 $tmp = trim($k);
-                $tmp_len = mb_strlen($tmp);
-                if ($tmp_len > 4) {
-                    for($i=2; $i <= $tmp_len; $i++) {
-                        $kwd_list[] = mb_substr($tmp, $i-2, 2);
-                    }
-                } elseif ( $tmp_len > 0 ) {
-                    $kwd_list[] = $tmp;
+                if (empty($tmp)) {
+                    continue;
                 }
+                $search_text = '';
+                $tmp_len = mb_strlen($tmp);
+                for($i=0; $i<$tmp_len; $i++) {
+                    $search_text .= mb_substr($tmp, $i, 1) . '%';
+                }
+
+                $kwd_list[] = $search_text;
+                /*
                 file_put_contents(
                     '/tmp/wxm.log', 
                     json_encode($kwd_list, JSON_UNESCAPED_UNICODE), 
                     FILE_APPEND
                 );
+                */
             }
 
             if (count($kwd_list) > 0) {
                 $cond['AND']['OR'] = [
-                    'rs_title[~]'    => [ 'AND' => $kwd_list ],
-                    'rs_keywords[~]' => [ 'AND' => $kwd_list ]
+                    'rs_title[~]'    => $kwd_list,
+                    'rs_keywords[~]' => $kwd_list,
+                    'rs_content'     => $kwd_list
                 ];
             }
         }

@@ -54,7 +54,7 @@ class Resource {
             $fields = $this->fields;
         }
         
-        $sql = DB::instance()->debug()->select($this->table, $fields, $cond);
+        //$sql = DB::instance()->debug()->select($this->table, $fields, $cond);
 
         $rl = DB::instance()->select($this->table, $fields, $cond);
 

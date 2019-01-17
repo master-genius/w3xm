@@ -156,8 +156,8 @@ class First {
             if (count($kwd_list) > 0) {
                 $cond['AND']['OR'] = [
                     'rs_title[~]'    => [ 'AND' => $kwd_list ],
-                    'rs_keywords[~]' => [ 'AND' => $kwd_list ]
-                ];   
+                    'rs_keywords[~]' => [ 'OR' => $kwd_list ]
+                ];
             }
         }
         

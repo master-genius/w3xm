@@ -55,7 +55,6 @@ class Resource {
         }
         
         $sql = DB::instance()->debug()->select($this->table, $fields, $cond);
-        file_put_contents('/tmp/sql.log', $sql . "\n", FILE_APPEND);
 
         $rl = DB::instance()->select($this->table, $fields, $cond);
 

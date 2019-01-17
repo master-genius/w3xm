@@ -146,7 +146,7 @@ class First {
                 $tmp_len = mb_strlen($tmp);
                 if ($tmp_len > 4) {
                     for($i=2; $i < $tmp_len; $i++) {
-                        $kwd_list[] = mb_substr($tmp, $i-1, 2);
+                        $kwd_list[] = mb_substr($tmp, $i-2, 2);
                     }
                 } elseif ( $tmp_len > 0 ) {
                     $kwd_list[] = $tmp;

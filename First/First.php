@@ -166,7 +166,7 @@ class First {
                 $cond['AND']['OR'] = [
                     'rs_title[~]'    => $kwd_list,
                     'rs_keywords[~]' => $kwd_list,
-                    'rs_content[~]'  => $kwd_list
+                    //'rs_content[~]'  => $kwd_list
                 ];
             }
         }

@@ -146,7 +146,7 @@ class First {
                 if (empty($tmp)) {
                     continue;
                 }
-                $search_text = '';
+                $search_text = '%';
                 $tmp_len = mb_strlen($tmp);
                 for($i=0; $i<$tmp_len; $i++) {
                     $search_text .= mb_substr($tmp, $i, 1) . '%';
